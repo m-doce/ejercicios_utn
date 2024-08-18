@@ -1,27 +1,86 @@
 @startuml
-'https://plantuml.com/class-diagram
+title "Ferrovías"
+!theme reddress-darkblue
+scale 1.3
+'skinparam Linetype ortho
+skinparam titleBorderRoundCorner 15
+skinparam titleBorderThickness 2
+skinparam titleBorderColor #000000
+skinparam titleBackgroundColor #FF0000
+skinparam defaultFontColor #FFFFFF
+skinparam titleFontColor #FFFFFF
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
+class Formacion {
+    -ArrayList<Vagon> vagones;
+    -ArrayList<Locomotora> locomotoras;
 
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+    +getTotalPasajerosTransportables();
+    +getCantidadVagonesLivianos();
+    +getVelocidadMaxima();
+    +boolean esEficiente();
+    +boolean puedeMoverse();
+    +getKilosDeEmpujeFaltantes();
+    +getPesoTotal();
+    +getTotalUnidades();
+    +boolean esCompleja();
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class Locomotora {
+    -double peso;
+    -double pesoDeArrastreMaximo;
+    -double velocidadMaxima;
+    -Estado estado;
+
+    +getArrastreUtil();
+    +boolean esEficiente();
 }
+
+enum Estado {
+    DETENIDA,
+    EN_DEPOSITO,
+    EN_MARCHA
+}
+
+abstract class Vagon {
+    +abstract getPesoMaximo();
+    +boolean esLiviano();
+    +abstract getCantidadMaximaPasajeros();
+}
+
+class VagonDeCarga {
+    -double cargaMaxima;
+
+    +getPesoMaximo();
+    +getCantidadMaximaPasajeros();
+}
+
+class VagonDePasajeros {
+    -double largo;
+    -double anchoUtil;
+
+    +getPesoMaximo();
+    +getCantidadMaximaPasajeros();
+}
+
+class Deposito {
+    -ArrayList<Formacion> trenes;
+    -ArrayList<Locomotora> locomotoras;
+
+    +ArrayList<Vagon> getVagonesPesados();
+}
+
+
+
+'<<<<<<<<<<<<<< Relaciones <<<<<<<<<<<<<<
+Deposito *-- Formacion
+
+Formacion *-- Vagon
+Formacion *-r- Locomotora
+
+Vagon <|-l- VagonDeCarga
+Vagon <|-- VagonDePasajeros
+
+Locomotora -[hidden]r- Estado
 
 @enduml
