@@ -111,4 +111,13 @@ note left of VagonDeCarga::getCantidadMaximaPasajeros
 return 0;
 endnote
 
+'<<<<<<<<<<<<<< Locomotora <<<<<<<<<<<<<<
+note right of Locomotora::getArrastreUtil
+return this.pesoDeArrastreMaximo - this.peso;
+endnote
+
+note right of Locomotora::esEficiente
+return this.getArrastreUtil() > 5 * this.peso;
+endnote
+
 @enduml
