@@ -83,4 +83,32 @@ Vagon <|-- VagonDePasajeros
 
 Locomotora -[hidden]r- Estado
 
+
+
+'<<<<<<<<<<<<<< Notas <<<<<<<<<<<<<<
+
+'<<<<<<<<<<<<<< Vagones <<<<<<<<<<<<<<
+note right of Vagon::esLiviano
+return this.getPesoMaximo < 2500
+endnote
+
+note left of VagonDePasajeros::getPesoMaximo
+return this.getCantidadMaximaPasajeros() * 80;
+endnote
+
+note left of VagonDePasajeros::getCantidadMaximaPasajeros
+if(this.anchoUtil <= 2.5)
+    return this.largo * 8;
+else
+    return this.largo * 10;
+endnote
+
+note left of VagonDeCarga::getPesoMaximo
+return this.cargaMaxima + 160;
+endnote
+
+note left of VagonDeCarga::getCantidadMaximaPasajeros
+return 0;
+endnote
+
 @enduml
