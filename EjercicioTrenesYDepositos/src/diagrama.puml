@@ -189,4 +189,14 @@ note left of Formacion::esCompleja
 return this.getPesoTotal() > 10000 || this.getTotalUnidades() > 20;
 endnote
 
+'<<<<<<<<<<<<<< Deposito <<<<<<<<<<<<<<
+note right of Deposito::getVagonesPesados
+return trenes.stream()
+                   .map(tren -> tren.vagones().stream()
+                                                            .max(Comparator.comparingDouble(Vagon::getPesoMaximo))
+                                                            .orElse(null))
+                                                            .filter(vagon -> vagon != null)
+                                                            .collect(Collectors.toCollection(ArrayList::new));
+endnote
+
 @enduml
