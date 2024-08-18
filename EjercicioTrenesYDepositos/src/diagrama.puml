@@ -120,4 +120,73 @@ note right of Locomotora::esEficiente
 return this.getArrastreUtil() > 5 * this.peso;
 endnote
 
+'<<<<<<<<<<<<<< Formacion <<<<<<<<<<<<<<
+note left of Formacion::getTotalPasajerosTransportables
+return vagones.stream()
+                      .mapToInt(Vagon::getCantidadMaximaPasajeros)
+                      .sum();
+endnote
+
+note left of Formacion::getCantidadVagonesLivianos
+return vagones.stream()
+                      .filter(Vagon::esLiviano)
+                      .count();
+endnote
+
+note left of Formacion::getVelocidadMaxima
+return locomotoras.stream()
+                           .mapToDouble(Locomotora::getVelocidadMaxima)
+                           .min();
+endnote
+
+note left of Formacion::esEficiente
+return locomotoras.stream().allMatch(Locomotora::esEficiente);
+endnote
+
+note left of Formacion::puedeMoverse
+double arrastreTotal = locomotoras.stream()
+                                                   .mapToDouble(Locomotora::getArrastreUtil)
+                                                   .sum();
+double pesoTotal = vagones.stream()
+                                        .mapToDouble(Vagon::getPesoMaximo)
+                                        .sum();
+
+return arrastreTotal >= pesoTotal;
+endnote
+
+note left of Formacion::getKilosDeEmpujeFaltantes
+if(this.puedeMoverse())
+    return 0;
+else {
+    double arrastreTotal = locomotoras.stream()
+                                                       .mapToDouble(Locomotora::getArrastreUtil)
+                                                       .sum();
+    double pesoTotal = vagones.stream()
+                                            .mapToDouble(Vagon::getPesoMaximo)
+                                            .sum();
+
+    return pesoTotal - arrastreTotal;
+
+}
+endnote
+
+note left of Formacion::getPesoTotal
+double pesoVagones = vagones.stream()
+                                              .mapToDouble(Vagon::getPesoMaximo)
+                                              .sum();
+double pesoLocomotoras = locomotoras.stream()
+                                                         .mapToDouble(Locomotora::getPeso)
+                                                         .sum();
+
+return pesoVagones + pesoLocomotoras;
+endnote
+
+note left of Formacion::getTotalUnidades
+return vagones.count() + locomotoras.count();
+endnote
+
+note left of Formacion::esCompleja
+return this.getPesoTotal() > 10000 || this.getTotalUnidades() > 20;
+endnote
+
 @enduml
