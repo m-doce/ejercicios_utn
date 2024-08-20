@@ -136,7 +136,8 @@ endnote
 note left of Formacion::getVelocidadMaxima
 return locomotoras.stream()
                            .mapToDouble(Locomotora::getVelocidadMaxima)
-                           .min();
+                           .min()
+                           .orElse(0.0);
 endnote
 
 note left of Formacion::esEficiente
