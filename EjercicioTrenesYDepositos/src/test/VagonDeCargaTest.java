@@ -36,13 +36,13 @@ class VagonDeCargaTest {
     }
 
     @Test
-    @DisplayName("Verifica que retorne 0, ya que no puede llevar pasajeros")
+    @DisplayName("Retorna 0, ya que un vagón de carga no puede llevar pasajeros")
     void getCantidadMaximaPasajeros() {
         assertEquals(0, vagon.getCantidadMaximaPasajeros());
     }
 
     @Test
-    @DisplayName("Verifica que sea liviano si pesa menos de 2500, y que no lo sea si pesa más de 2500")
+    @DisplayName("Retorna true si pesa menos de 2500, o false si pesa más de 2500")
     void esLiviano() {
         VagonDeCarga vagonLiviano = new VagonDeCarga(1700);
         assertTrue(vagonLiviano.esLiviano());

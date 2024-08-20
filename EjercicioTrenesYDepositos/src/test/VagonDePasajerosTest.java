@@ -45,14 +45,14 @@ class VagonDePasajerosTest {
     }
 
     @Test
-    @DisplayName("Verifica que el cálculo del peso máximo sea correcto")
+    @DisplayName("Retorna el resultado de: la cantidad máxima de pasajeros que puede transportar * 80")
     void getPesoMaximo() {
         assertEquals(6400, vagonChico.getPesoMaximo());
         assertEquals(8000, vagonGrande.getPesoMaximo());
     }
 
     @Test
-    @DisplayName("Verifica que el cálculo de la cantidad máxima de pasajeros sea correcto")
+    @DisplayName("Retorna el resultado de: largo * 8 si su ancho útil es menor o igual a 2.5, o largo * 10 si su ancho útil es mayor a 2.5")
     void getCantidadMaximaPasajeros() {
         assertEquals(80, vagonChico.getCantidadMaximaPasajeros());
         assertEquals(100, vagonGrande.getCantidadMaximaPasajeros());
