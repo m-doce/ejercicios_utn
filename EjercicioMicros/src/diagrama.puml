@@ -18,7 +18,7 @@ class Micro {
     -int capacidadParados;
     -ArrayList<Pasajero> pasajeros;
 
-    +int getLugaresSentadosLibres();
+    +int getAsientosLibres();
     +int getLugaresParadosLibres();
     +int getLugaresTotalesLibres();
     +boolean puedeSubir(Pasajero p);
@@ -54,10 +54,14 @@ class Fiaca {
 }
 
 class Moderado {
+    -int minLugaresLibres;
+
     +boolean quiereSubir(Micro m);
 }
 
 class Obsecuente {
+    -Pasajero jefe;
+
     +boolean quiereSubir(Micro m);
 }
 
@@ -67,11 +71,22 @@ class Obsecuente {
 Pasajero -l-> Micro
 Pasajero *-- Perfil
 
-Perfil <|.. Apurado
+Perfil <|.l. Apurado
 Perfil <|.. Claustrofobico
 Perfil <|.. Fiaca
 Perfil <|.. Moderado
-Perfil <|.. Obsecuente
+Perfil <|.r. Obsecuente
 
+
+'Notas
+note bottom of Apurado: return true;
+
+note bottom of Claustrofobico: return m.volumen > 120;
+
+note bottom of Fiaca: return m.getAsientosLibres() > 0;
+
+note bottom of Moderado: return this.minLugaresLibres <= m.getLugaresTotalesLibres();
+
+note bottom of Obsecuente: return this.jefe.quiereSubir(m);
 
 @enduml
