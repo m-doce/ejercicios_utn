@@ -1,0 +1,77 @@
+@startuml
+title "ACME S.A."
+!theme reddress-darkblue
+scale 1.3
+skinparam Linetype ortho
+skinparam titleBorderRoundCorner 15
+skinparam titleBorderThickness 2
+skinparam titleBorderColor #C4CBCA
+skinparam titleBackgroundColor #0A0F0D
+skinparam defaultFontColor #FFFFFF
+skinparam titleFontColor #EE4266
+
+
+
+class Micro {
+    -double volumen;
+    -int capacidadSentados;
+    -int capacidadParados;
+    -ArrayList<Pasajero> pasajeros;
+
+    +int getLugaresSentadosLibres();
+    +int getLugaresParadosLibres();
+    +int getLugaresTotalesLibres();
+    +boolean puedeSubir(Pasajero p);
+    +subirPasajero(Pasajero p);
+    +bajarPasajero(Pasajero p);
+    +Pasajero getPrimeroEnSubir();
+}
+
+class Pasajero {
+    -String nombre;
+    -int legajo;
+    -Perfil perfil;
+    -Pasajero jefe;
+
+    +boolean esJefe();
+    +boolean quiereSubir(Micro m);
+}
+
+interface Perfil {
+    +boolean quiereSubir(Micro m);
+}
+
+class Apurado {
+    +boolean quiereSubir(Micro m);
+}
+
+class Claustrofobico {
+    +boolean quiereSubir(Micro m);
+}
+
+class Fiaca {
+    +boolean quiereSubir(Micro m);
+}
+
+class Moderado {
+    +boolean quiereSubir(Micro m);
+}
+
+class Obsecuente {
+    +boolean quiereSubir(Micro m);
+}
+
+
+
+'Relaciones
+Pasajero -l-> Micro
+Pasajero *-- Perfil
+
+Perfil <|.. Apurado
+Perfil <|.. Claustrofobico
+Perfil <|.. Fiaca
+Perfil <|.. Moderado
+Perfil <|.. Obsecuente
+
+
+@enduml
