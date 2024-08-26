@@ -79,6 +79,7 @@ Perfil <|.r. Obsecuente
 
 
 'Notas
+'Perfiles
 note bottom of Apurado: return true;
 
 note bottom of Claustrofobico: return m.volumen > 120;
@@ -88,5 +89,37 @@ note bottom of Fiaca: return m.getAsientosLibres() > 0;
 note bottom of Moderado: return this.minLugaresLibres <= m.getLugaresTotalesLibres();
 
 note bottom of Obsecuente: return this.jefe.quiereSubir(m);
+
+'Pasajero
+note right of Pasajero::esJefe
+return this.jefe == null;
+endnote
+
+note right of Pasajero::quiereSubir
+return this.perfil.quiereSubir(m);
+endnote
+
+'Micro
+note as N1
+Asumo que a medida que los pasajeros se suben
+al micro van ocupando primero los asientos libres
+endnote
+Micro -u- N1
+
+note left of Micro::getAsientosLibres
+int asientosLibres = this.capacidadSentados - this.pasajeros.count();
+if(asientosLibres <= 0)
+    asientosLibres = 0;
+return asientosLibres;
+endnote
+
+note left of Micro::getLugaresParadosLibres
+int lugaresLibres = this.capacidadParados;
+if(this.getAsientosLibres() == 0)
+    lugaresLibres -= (this.pasajeros.count() - this.capacidadSentados);
+if(lugaresLibres <= 0)
+    lugaresLibres = 0;
+return lugaresLibres;
+endnote
 
 @enduml
