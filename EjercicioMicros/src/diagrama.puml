@@ -23,9 +23,9 @@ class Micro {
     +int getLugaresParadosLibres();
     +int getLugaresTotalesLibres();
     +boolean puedeSubir(Pasajero p);
-    +subirPasajero(Pasajero p);
-    +bajarPasajero(Pasajero p);
-    +setPrimeroEnSubir(Pasajero p);
+    +void subirPasajero(Pasajero p);
+    +void bajarPasajero(Pasajero p);
+    +void setPrimeroEnSubir(Pasajero p);
     +Pasajero getPrimeroEnSubir();
 }
 
@@ -88,7 +88,7 @@ note bottom of Claustrofobico: if(m.volumen <= 120)\n    throw new Claustrofobic
 
 note bottom of Fiaca: if(m.getAsientosLibres() == 0)\n    throw new FiacaNoSubeException(); \nreturn true;
 
-note bottom of Moderado: if(this.minLugaresLibres >= m.getLugaresTotalesLibres())\n    throw new ModeradoNoSubeException(); \nreturn true;
+note bottom of Moderado: if(this.minLugaresLibres > m.getLugaresTotalesLibres())\n    throw new ModeradoNoSubeException(); \nreturn true;
 
 note bottom of Obsecuente: return this.jefe.quiereSubir(m);
 
@@ -117,10 +117,11 @@ endnote
 
 note left of Micro::getLugaresParadosLibres
 int lugaresLibres = this.capacidadParados;
-if(this.getAsientosLibres() == 0)
+if(this.getAsientosLibres() == 0) {
     lugaresLibres -= (this.pasajeros.count() - this.capacidadSentados);
-if(lugaresLibres <= 0)
-    lugaresLibres = 0;
+    if(lugaresLibres <= 0)
+        lugaresLibres = 0;
+}
 return lugaresLibres;
 endnote
 
@@ -130,8 +131,8 @@ endnote
 
 note left of Micro::puedeSubir
 if(this.getLugaresTotalesLibres() == 0)
-    throw new MicroLlenoException;
-return p.quiereSubir();
+    throw new MicroLlenoException();
+return p.quiereSubir(this);
 endnote
 
 note left of Micro::subirPasajero
@@ -156,7 +157,7 @@ return;
 endnote
 
 note left of Micro::bajarPasajero
-if(this.pasajeros.count == 0)
+if(this.pasajeros.count() == 0)
     throw new MicroVacioException();
 if(this.pasajeros.contains(p) == false)
     throw new NoExistePasajeroException();
