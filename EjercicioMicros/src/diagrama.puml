@@ -131,8 +131,7 @@ endnote
 note left of Micro::puedeSubir
 if(this.getLugaresTotalesLibres() == 0)
     throw new MicroLlenoException;
-else
-    return p.quiereSubir();
+return p.quiereSubir();
 endnote
 
 note left of Micro::subirPasajero
@@ -157,10 +156,11 @@ return;
 endnote
 
 note left of Micro::bajarPasajero
+if(this.pasajeros.count == 0)
+    throw new MicroVacioException();
 if(this.pasajeros.contains(p) == false)
     throw new NoExistePasajeroException();
-else
-    this.pasajeros.remove(p);
+this.pasajeros.remove(p);
 return;
 endnote
 
