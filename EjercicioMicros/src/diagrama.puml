@@ -62,7 +62,7 @@ class Moderado {
 }
 
 class Obsecuente {
-    -Pasajero jefe;
+    -Perfil perfilJefe;
 
     +boolean quiereSubir(Micro m);
 }
@@ -90,7 +90,7 @@ note bottom of Fiaca: if(m.getAsientosLibres() == 0)\n    throw new FiacaNoSubeE
 
 note bottom of Moderado: if(this.minLugaresLibres > m.getLugaresTotalesLibres())\n    throw new ModeradoNoSubeException(); \nreturn true;
 
-note bottom of Obsecuente: return this.jefe.quiereSubir(m);
+note bottom of Obsecuente: return this.perfilJefe.quiereSubir(m);
 
 'Pasajero
 note right of Pasajero::esJefe

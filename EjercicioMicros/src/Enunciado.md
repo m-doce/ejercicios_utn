@@ -8,7 +8,7 @@ los micros iguales).
 **La gente no es toda igual, entonces para subirse a un micro se fija en distintas cosas:**
 
 - Los apurados se suben siempre
-- Los claustrofóbicos se suben sólo si el micro tiene más de 120 m3 de volumen (se sabe el volumen de
+- Los claustrofóbicos se suben sólo si el micro tiene más de 120 m³ de volumen (se sabe el volumen de
 cada micro)
 - Los fiacas se suben sólo si entran sentados
 - Los moderados se suben sólo si quedan al menos *X* lugares libres (no importa si sentados o parados),

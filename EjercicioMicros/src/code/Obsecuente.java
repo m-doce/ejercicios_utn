@@ -2,14 +2,22 @@ package code;
 
 public class Obsecuente implements Perfil {
 
-    private Pasajero jefe;
+    private Perfil perfilJefe;
 
-    public Obsecuente(Pasajero jefe) {
-        this.jefe = jefe;
+    public void setPerfilJefe(Perfil perfilJefe) {
+        this.perfilJefe = perfilJefe;
+    }
+
+    public Perfil getPerfilJefe() {
+        return perfilJefe;
+    }
+
+    public Obsecuente(Perfil perfilJefe) {
+        this.perfilJefe = perfilJefe;
     }
 
     @Override
     public boolean quiereSubir(Micro m) {
-        return this.jefe.quiereSubir(m);
+        return this.perfilJefe.quiereSubir(m);
     }
 }
