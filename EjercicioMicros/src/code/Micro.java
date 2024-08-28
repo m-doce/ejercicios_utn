@@ -79,25 +79,25 @@ public class Micro {
             throw new MicroLlenoException();
         return p.quiereSubir(this);
     }
-    public void subirPasajero(Pasajero p) {
+    public String subirPasajero(Pasajero p) {
         try {
             this.puedeSubir(p);
             this.setPrimeroEnSubir(p);
             this.pasajeros.add(p);
         }
         catch(MicroLlenoException e) {
-            //manejo del error
+            return "El micro está lleno, espere el próximo.";
         }
         catch(ModeradoNoSubeException e) {
-            //manejo del error
+            return "El moderado no quiere subir.";
         }
         catch(ClaustrofobicoNoSubeException e) {
-            //manejo del error
+            return "El claustrofobico no quiere subir.";
         }
         catch(FiacaNoSubeException e) {
-            //manejo del error
+            return "El fiaca no quiere subir.";
         }
-        return;
+        return "El pasajero subió al micro.";
     }
     public void bajarPasajero(Pasajero p) {
         if(this.pasajeros.size() == 0)
