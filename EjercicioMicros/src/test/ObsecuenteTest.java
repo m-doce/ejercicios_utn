@@ -1,6 +1,7 @@
 package test;
 
 import code.*;
+import exceptions.ClaustrofobicoNoSubeException;
 import exceptions.FiacaNoSubeException;
 import exceptions.ModeradoNoSubeException;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,6 +50,19 @@ class ObsecuenteTest {
 
         when(micro.getLugaresTotalesLibres()).thenReturn(5);
         assertThrows(ModeradoNoSubeException.class, () -> {
+            instance.quiereSubir(micro);
+        });
+    }
+
+    @Test
+    @DisplayName("Verifica que el Obsecuente siga los pasos de su jefe Claustrofobico")
+    void quiereSubirJefeClaustrofobico() {
+        instance.setPerfilJefe(new Claustrofobico());
+        when(micro.getVolumen()).thenReturn(150.0);
+        assertTrue(instance.quiereSubir(micro));
+
+        when(micro.getVolumen()).thenReturn(115.0);
+        assertThrows(ClaustrofobicoNoSubeException.class, () -> {
             instance.quiereSubir(micro);
         });
     }
